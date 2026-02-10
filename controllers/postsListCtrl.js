@@ -49,8 +49,29 @@ function show(req, res) {
 // STORE
 function store(req, res) {
     // copiamo la logica della store
+    // creo nuovo oggetto da spingere in array
+    const newId = postsList[postsList.length - 1].id + 1;
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: [req.body.tags]
 
-    res.send("Creazione di un nuovo post");
+    }
+    // AGGIUNGO POST
+    postsList.push(newPost);
+
+    // VERIFICA AGGIORNAMENTO ARRAY
+    console.log(postsList);
+
+    // RISULTATI
+    res.status(201);
+    res.json(newPost);
+
+
+    // TEMPORARY DEBUG
+    //res.send("Creazione di un nuovo post");
 
 
 }
@@ -58,8 +79,33 @@ function store(req, res) {
 // UPDATE
 function update(req, res) {
     // copiamo la logica dell'update
+    // !!! RECUPERA E RIPETI parseINT e .find !!!
+    /* CON id = parseINT rendo un numero l'ID dell'array di oggetti (postsList) */
+    const id = parseInt(req.params.id)
+    /* avendo reso id un numero lo posso trovare e confrontare con .find */
+    const post = postsList.find(post => post.id === id);
+    /* Logica di verifica esistenza post richiesto */
+    if (!post) {
 
-    res.send(`Modifica del post ${req.params.id}`);
+        return res.json({
+            status: 404,
+            error: "Not Found!",
+            message: "Post inesistente"
+        })
+    }
+    
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    console.log(postsList);
+
+    res.json(post);
+
+
+    // TEMPORARY DEBUG
+    //res.send(`Modifica del post ${req.params.id}`);
 
 }
 

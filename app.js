@@ -6,6 +6,8 @@ const postsRouter = require("./routers/posts");
 
 // attivazione cartella public
 app.use(express.static("public"));
+// attivazione registro body parser
+app.use(express.json());
 // devio gestione richieste su file routers/posts.js
 app.use("/posts", postsRouter);
 
