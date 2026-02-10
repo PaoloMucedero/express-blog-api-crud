@@ -3,30 +3,25 @@ const express = require("express");
 const router = express.Router();
 
 // UTILIZZO IL FILE CHE CONTIENE L'ARRAY DI OGGETTI
-const postsList = require(`./../data/posts`)
+//const postsList = require(`./../data/posts`)
+// Ora che ho la logica che opera sull'array separata da questo file, non devo più utilizzare l'array qui, ma posso semplicemente importare il controller
+const postsListCtrl = require(`../controllers/postsListCtrl`);
+const { index, show, store, update, modify, destroy } = postsListCtrl
+//  Dove prima sviluppavo la logica delle varie risposte, ora posso invocare le funzioni contenute dal controller
 
 // INDEX → lista di tutti i post
-
+router.get("/", postsListCtrl.index);
 
 // SHOW → dettaglio di un singolo post
-router.get("/:id", (req, res) => {
-  res.send(`Dettaglio del post ${req.params.id}`);
-});
+router.get("/:id", postsListCtrl.show);
 
-// CREATE → creazione di un nuovo post
-router.post("/", (req, res) => {
-  res.send("Creazione di un nuovo post");
-});
-
+// STORE → creazione di un nuovo post
+router.post(`/`, postsListCtrl.store);
 // UPDATE → modifica di un post esistente
-router.put("/:id", (req, res) => {
-  res.send(`Modifica del post ${req.params.id}`);
-});
+router.put(`/:id`, postsListCtrl.update);
 
 // DELETE → cancellazione di un post
-router.delete("/:id", (req, res) => {
-  res.send(`Cancellazione del post ${req.params.id}`);
-});
+router.delete(`/:id`, postsListCtrl.destroy);
 
 
 

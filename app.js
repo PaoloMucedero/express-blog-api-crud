@@ -8,6 +8,7 @@ const postsRouter = require("./routers/posts");
 app.use(express.static("public"));
 // devio gestione richieste su file routers/posts.js
 app.use("/posts", postsRouter);
+
 // Routing tramite express - vedi file posts.js
 // HOME PAGE
 app.get("/", (req, res) => {
