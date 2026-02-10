@@ -6,28 +6,7 @@ const router = express.Router();
 const postsList = require(`./../data/posts`)
 
 // INDEX → lista di tutti i post
-router.get("/", (req, res) => {
-  // provo a filtrare la lista di post
 
-  // devo creare una variabile che parte dallo stesso array
-  let filteredList = postsList;
-  // scrivo la logica del filtro
-  if (req.query.title) {
-    filteredList = postsList.filter(
-      post => post.title.includes(req.query.title)
-    );
-  }
-
-
-
-  const oggettoListaPost = {
-    numeroPost: postsList.length,
-    listaPost: filteredList
-  };
-  // test funzionamento filtro
-  res.json(oggettoListaPost)
-  //res.send("Lista dei post");
-});
 
 // SHOW → dettaglio di un singolo post
 router.get("/:id", (req, res) => {
