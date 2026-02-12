@@ -13,8 +13,12 @@ app.use(express.static("public"));
 // attivazione registro body parser
 app.use(express.json());
 
-// UTILIZZO MIDDLEWARES
-app.use(checkTime);
+//!!---------------MIDDLEWARES---------------!!
+
+// UTILIZZO GENERICO MIDDLEWARES (verrà eseguito per tutte le rotte)
+// app.use(checkTime);
+// UTILIZZO SPECIFICO PER ROTTA (verrà eseguito solo per quella rotta e tutte le rotte figlie)
+app.use("/posts", checkTime);
 
 // devio gestione richieste su file routers/posts.js
 app.use("/posts", postsRouter);
