@@ -6,7 +6,7 @@ const router = express.Router();
 //const postsList = require(`./../data/posts`)
 // Ora che ho la logica che opera sull'array separata da questo file, non devo più utilizzare l'array qui, ma posso semplicemente importare il controller
 const postsListCtrl = require(`../controllers/postsListCtrl`);
-const { index, show, store, update, modify, destroy } = postsListCtrl
+const { index, show, store, update, destroy } = postsListCtrl
 //  Dove prima sviluppavo la logica delle varie risposte, ora posso invocare le funzioni contenute dal controller
 
 // INDEX → lista di tutti i post

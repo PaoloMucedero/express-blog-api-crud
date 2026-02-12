@@ -1,6 +1,10 @@
 const express = require(`express`)
 const app = express()
 const port = 3000
+
+// Import middleware
+const checkTime = require(`./middlewares/checkTime`);
+
 // Collegamento file responsabile delle rotte
 const postsRouter = require("./routers/posts");
 
@@ -8,6 +12,10 @@ const postsRouter = require("./routers/posts");
 app.use(express.static("public"));
 // attivazione registro body parser
 app.use(express.json());
+
+// UTILIZZO MIDDLEWARES
+app.use(checkTime);
+
 // devio gestione richieste su file routers/posts.js
 app.use("/posts", postsRouter);
 
