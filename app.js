@@ -4,7 +4,8 @@ const port = 3000
 
 // Import middleware
 const checkTime = require(`./middlewares/checkTime`);
-
+const errorsHandler = require(`./middlewares/handleError`);
+const notFound = require(`./middlewares/notFoundStatus`)
 // Collegamento file responsabile delle rotte
 const postsRouter = require("./routers/posts");
 
@@ -29,6 +30,14 @@ app.get("/", (req, res) => {
     res.send("<h1>Home Route app Blog</h1>")
 })
 
+
+// registrazione middlewares
+
+app.use(errorsHandler);
+
+
+
+app.use(notFound);
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 
